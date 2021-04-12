@@ -3,12 +3,11 @@
 # Wir haben einen Datensatz aus der Wikipedia geladen und ihn als JSON abgelegt.
 # Leider hat der fiese Dozent einen Fehler bei der Ausgabe gemacht.
 #
-# * Lade die Datensätze in `data/`.
-# * Stelle daraus eine *flache* Tabelle her.
-# * Berechne das durchschnittliche Alter für die einzelnen Fraktionen
+# * Lade die Datensätze in `data/`, danke an `map_dfr`
+# * Stelle daraus eine *flache* Tabelle her. Die Tabelle soll die folgenden Spalten beinhalten: name, lebensdaten, land, wahlkreis, erststimmen, bemerkungen, fraktion.
+# * Berechne das durchschnittliche Alter für die einzelnen Fraktionen und sortiere den Datensatz nach dieser Variable.
 
 library(assertthat)
-
 
 # data <- …
 # ans1 <- …
