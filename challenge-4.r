@@ -7,10 +7,28 @@
 # * Stelle daraus eine *flache* Tabelle her. Die Tabelle soll die folgenden Spalten beinhalten: name, lebensdaten, land, wahlkreis, erststimmen, bemerkungen, fraktion.
 # * Berechne das durchschnittliche Alter für die einzelnen Fraktionen und sortiere den Datensatz nach dieser Variable.
 
+# load libraries
 library(assertthat)
+library(dplyr)
+library(purrr)
+library(jsonlite)
+library(tidyr)
 
-# data <- …
-# ans1 <- …
+# load data
+data <- list.files("data/", pattern = "json", full.names = T) %>%
+  map_dfr(fromJSON)
+
+
+# unnest data, get rid of the typo "part0et" but keep "fraktion" with .keep, call the whole thing bt2
+bt2 <- data %>% 
+  unnest(abgeordnete) %>% 
+  mutate(part0et, .keep = "unused")
+
+# create ans1: calculate average age of each faction, arrange in descending order
+ans1 <- bt2 %>% 
+  group_by(fraktion) %>% 
+  summarise(avg_age = 2021 - mean(lebensdaten)) %>% 
+  arrange(desc(avg_age))
 
 if (
   assert_that(
